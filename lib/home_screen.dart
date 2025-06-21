@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_series/slider_provider.dart';
 
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+class HomeScreen2 extends ConsumerWidget {
+  const HomeScreen2({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,8 +60,8 @@ final switchProvider = StateProvider<bool>((ref) {
 });
 
 // /*
-class HomeScreen2 extends ConsumerWidget {
-  const HomeScreen2({super.key});
+class HomeScreen3 extends ConsumerWidget {
+  const HomeScreen3({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
