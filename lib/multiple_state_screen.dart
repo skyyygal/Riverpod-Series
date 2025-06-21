@@ -14,21 +14,23 @@ class HomeScreen extends ConsumerWidget {
         children: [
           Consumer(
             builder: (context, ref, child) {
-              final slider = ref.watch(sliderProvider2);
-              print("container");
+              final slider = ref.watch(
+                sliderProvider2.select((state) => state.showPassword),
+              );
+              // print("container");
               return InkWell(
                 onTap: () {
                   print("Show Passweord");
                   final stateProvider2 = ref.read(sliderProvider2.notifier);
                   stateProvider2.state = stateProvider2.state.copyWith(
-                    showPassword: !slider.showPassword,
+                    showPassword: !slider,
                   );
                 },
                 child: SizedBox(
                   height: 100,
                   width: 100,
                   // color: Colors.red.withOpacity(slider.slider),
-                  child: slider.showPassword
+                  child: slider
                       ? Icon(Icons.remove_red_eye)
                       : Icon(Icons.image),
                 ),
@@ -38,22 +40,26 @@ class HomeScreen extends ConsumerWidget {
 
           Consumer(
             builder: (context, ref, child) {
-              final slider = ref.watch(sliderProvider2);
+              final slider = ref.watch(
+                sliderProvider2.select((state) => state.slider),
+              );
               print("container");
               return Container(
                 height: 100,
                 width: 100,
-                color: Colors.red.withOpacity(slider.slider),
+                color: Colors.red.withOpacity(slider),
               );
             },
           ),
 
           Consumer(
             builder: (context, ref, child) {
-              final slider = ref.watch(sliderProvider2);
+              final slider = ref.watch(
+                sliderProvider2.select((state) => state.slider),
+              );
               print("slider");
               return Slider(
-                value: slider.slider,
+                value: slider,
                 onChanged: (value) {
                   final stateProvider2 = ref.read(sliderProvider2.notifier);
                   stateProvider2.state = stateProvider2.state.copyWith(
