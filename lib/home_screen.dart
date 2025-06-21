@@ -7,25 +7,61 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final slider = ref.watch(sliderProvider);
+    print("object");
     return Scaffold(
       appBar: AppBar(title: Text("Slider App")),
       body: Column(
         children: [
-          Container(
-            height: 100,
-            width: 100,
-            color: Colors.red.withOpacity(0.5),
+          Consumer(
+            builder: (context, ref, child) {
+              final slider = ref.watch(sliderProvider);
+              print("container");
+              return Container(
+                height: 100,
+                width: 100,
+                color: Colors.red.withOpacity(slider),
+              );
+            },
           ),
-          Slider(value: 1, onChanged: (value) {}),
+
+          Consumer(
+            builder: (context, ref, child) {
+              final slider = ref.watch(sliderProvider);
+              print("slider");
+              return Slider(
+                value: slider,
+                onChanged: (value) {
+                  ref.read(sliderProvider.notifier).state = value;
+                },
+              );
+            },
+          ),
+          SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen2()),
+              );
+            },
+            child: Text("Next Screen"),
+          ),
         ],
       ),
     );
   }
 }
 
-/* class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+final counter = StateProvider<int>((ref) {
+  return 0;
+});
+final switchProvider = StateProvider<bool>((ref) {
+  return true;
+});
+
+// /*
+class HomeScreen2 extends ConsumerWidget {
+  const HomeScreen2({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -50,7 +86,6 @@ class HomeScreen extends ConsumerWidget {
                 value: didSwitch,
                 onChanged: (value) {
                   ref.read(switchProvider.notifier).state = value;
-
                 },
               );
             },
@@ -61,23 +96,26 @@ class HomeScreen extends ConsumerWidget {
             children: [
               ElevatedButton(
                 onPressed: () {
-                  ref.read(counter.notifier).state++;
-                },
-                child: Text("+", style: TextStyle(fontSize: 30)),
-              ),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
                   if (ref.read(counter) > 0) {
                     ref.read(counter.notifier).state--;
                   }
                 },
                 child: Text("-", style: TextStyle(fontSize: 30)),
               ),
+              SizedBox(width: 10),
+
+              ElevatedButton(
+                onPressed: () {
+                  ref.read(counter.notifier).state++;
+                },
+                child: Text("+", style: TextStyle(fontSize: 30)),
+              ),
             ],
           ),
         ],
       ),
-    ); 
+    );
   }
-}*/
+}
+
+// */
