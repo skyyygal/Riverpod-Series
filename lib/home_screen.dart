@@ -15,9 +15,11 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final subscribe = ref.watch(hello);
+    final displayAge = ref.watch(age);
     return Scaffold(
       appBar: AppBar(),
-      body: Center(child: Text("Hello")),
+      body: Center(child: Text("$subscribe, age: ${displayAge.toString()}")),
     );
   }
 }
