@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// TO READ CONST VALUE
-final hello = Provider<String>((ref) {
-  return 'Subscriber';
-});
-
-final counter = StateProvider<int>((ref) {
-  return 0;
-});
+import 'package:riverpod_series/slider_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final slider = ref.watch(sliderProvider);
+    return Scaffold(
+      appBar: AppBar(title: Text("Slider App")),
+      body: Column(
+        children: [
+          Container(
+            height: 100,
+            width: 100,
+            color: Colors.red.withOpacity(0.5),
+          ),
+          Slider(value: 1, onChanged: (value) {}),
+        ],
+      ),
+    );
+  }
+}
+
+/* class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
@@ -25,6 +39,20 @@ class HomeScreen extends ConsumerWidget {
               final count = ref.watch(counter);
               print("build 2");
               return Center(child: Text(count.toString()));
+            },
+          ),
+          SizedBox(height: 30),
+          Consumer(
+            builder: (context, ref, child) {
+              final didSwitch = ref.watch(switchProvider);
+              print("build 3");
+              return Switch(
+                value: didSwitch,
+                onChanged: (value) {
+                  ref.read(switchProvider.notifier).state = value;
+
+                },
+              );
             },
           ),
           SizedBox(height: 30),
@@ -50,6 +78,6 @@ class HomeScreen extends ConsumerWidget {
           ),
         ],
       ),
-    );
+    ); 
   }
-}
+}*/
