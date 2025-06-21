@@ -37,6 +37,15 @@ class HomeScreen extends ConsumerWidget {
                 },
                 child: Text("+", style: TextStyle(fontSize: 30)),
               ),
+              SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {
+                  if (ref.read(counter) > 0) {
+                    ref.read(counter.notifier).state--;
+                  }
+                },
+                child: Text("-", style: TextStyle(fontSize: 30)),
+              ),
             ],
           ),
         ],
