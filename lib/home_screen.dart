@@ -10,6 +10,26 @@ final age = Provider<int>((ref) {
   return 24;
 });
 
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final subscribe = ref.watch(hello);
+    final displayAge = ref.watch(age);
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(child: Text("$subscribe, age: ${displayAge.toString()}")),
+    );
+  }
+}
+
+/* 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -23,3 +43,4 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 }
+ */
