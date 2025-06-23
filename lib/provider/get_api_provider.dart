@@ -4,6 +4,8 @@ import 'package:riverpod_series/state/get_api_state.dart';
 final getPostProvider = StateNotifierProvider<PostNotifier, PostState>((ref) {
   return PostNotifier();
 });
+
+final expandedProvider = StateProvider<int?>((ref) => null);
 // final getPostProvider = FutureProvider<List<Post>>((ref) async {
 //   List<Post> posts = [];
 //   try {

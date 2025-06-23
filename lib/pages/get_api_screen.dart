@@ -13,6 +13,8 @@ class Post extends ConsumerWidget {
       body: Consumer(
         builder: (context, ref, child) {
           final getState = ref.watch(getPostProvider);
+          final expandedIndex = ref.watch(expandedProvider);
+
           if (getState is InitialPostState) {
             print("InitialPostState");
             return Center(child: Text("Press FAB to Fetch data"));
@@ -32,13 +34,23 @@ class Post extends ConsumerWidget {
             return ListView.builder(
               itemCount: getState.posts.length,
               itemBuilder: (context, index) {
+                final isExpanded = expandedIndex == index;
                 final post = getState.posts[index];
                 print("Post ${index + 1}: ${post.title}");
-                return Card(
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: ListTile(
+                    onTap: () {
+                      ref.read(expandedProvider.notifier).state = isExpanded
+                          ? null
+                          : index;
+                    },
                     leading: CircleAvatar(child: Text(post.id.toString())),
-                    title: Text("post.title: ${post.title}"),
-                    subtitle: Text(post.body),
+                    title: Text(post.title.trimRight()),
+                    subtitle: isExpanded ? Text(post.body) : null,
+                    trailing: Icon(
+                      isExpanded ? Icons.expand_less : Icons.expand_more,
+                    ),
                   ),
                 );
               },
