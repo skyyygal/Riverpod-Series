@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_series/models/item_models.dart';
-import 'package:riverpod_series/provider/favorites/favorites_states.dart';
+import 'package:riverpod_series/favorite/provider/favorites_states.dart';
+import 'package:riverpod_series/model/item_models.dart';
 
 final favoriteProvider =
     StateNotifierProvider<FavoriteNotifier, FavoritesStates>((ref) {

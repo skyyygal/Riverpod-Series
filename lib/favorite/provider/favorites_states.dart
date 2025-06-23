@@ -1,4 +1,4 @@
-import 'package:riverpod_series/models/item_models.dart';
+import 'package:riverpod_series/model/item_models.dart';
 
 class FavoritesStates {
   final List<Items> allItems;

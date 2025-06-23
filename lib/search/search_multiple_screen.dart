@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_series/provider/search_multiple_provider.dart';
+import 'package:riverpod_series/search/provider/search_multiple_provider.dart';
 
 class SearchMultipleScreen extends ConsumerWidget {
   const SearchMultipleScreen({super.key});
